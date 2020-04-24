@@ -1,0 +1,33 @@
+Developer Manual
+Beta Testing version
+
+
+Enviornment requirements:
+	Ubuntu 18.04 or above
+
+Software Package requirements:
+	python version: > 3.6.9
+        kivy version: 1.11.1
+
+
+
+Python setup:
+        check python/python3 --version make sure it is  > 3.6.9
+  	(if python < 3 or python3 missing, notice in this version we used python3)
+
+Kivy setup:
+Based on the guide from:
+	https://kivy.org/doc/stable/installation/installation-rpi.html
+(Also works for Rpi users)
+
+1.sudo apt upgrade (update system)
+2.python -m pip install --user kivy // python3 -m pip install --user kivy
+3.python -m pip install kivy_garden.graph --extra-index-url https://kivy-garden.github.io/simple/
+4.Disable touch screen functions in Kivy:
+        Please follow: https://stackoverflow.com/questions/60890388/kivy-disable-touchpad-touchscreen-like-behavior
+
+After download and unzip the Beta package:
+	1. Open a command prompt and move/set address to  folder contain opeUI.py file using cd command
+	2. run python3 opeUI.py / python opeUI.py (if you don't have python3 and current python version >= 3.6.9)
+        3. When running successfully, you should see the Kivy UI window.
+       
