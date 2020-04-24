@@ -1,0 +1,602 @@
+<Login>:			
+    
+    Label:
+        markup: True
+        pos_hint:{'center_x': 0.2,'center_y':0.9}
+        size: 150,50
+        text: "[b][size=24]Online Polymer Extruder[/size][/b]"
+    
+    Button:
+        size_hint: None, None
+        pos_hint: {'center_x': 0.5, 'center_y': 0.2}
+        size: 150, 50
+        text: "Enter"
+        on_press: root.enter()
+        on_release:root.manager.current=root.location
+ 
+    BoxLayout:
+        orientation: 'vertical'
+        size_hint: None, None
+        pos_hint: {'center_x': 0.2, 'center_y': 0.5}
+        spacing: 100
+        
+        Label:
+            text: 'Name'
+            font_size: '30sp'
+    
+        Label:
+            text: 'Access Code'
+            font_size: '30sp'
+ 		
+        Label:
+            text: 'Polymer Code'
+            font_size: '30sp'
+
+
+    BoxLayout:
+        orientation: 'vertical'
+        size_hint: None, None
+        pos_hint: {'center_x': 0.5, 'center_y': 0.48}
+        spacing: 65
+		
+        TextInput:
+            id: name
+            size_hint: None, None
+            height: '32dp'
+            width: '400dp'
+            multiline: False
+    
+        TextInput:
+            id: access
+            size_hint: None, None
+            height: '32dp'
+            width: '400dp'
+            multiline: False
+ 		
+        TextInput:
+            id: polymer
+            size_hint: None, None
+            height: '32dp'
+            width: '400dp'
+            multiline: False
+			
+
+           
+
+<Menu>:
+
+    Label:
+        markup: True
+        pos_hint:{'center_x': 0.1,'center_y':0.9}
+        size: 150,50
+        text: "[b][size=24]Menu Page[/size][/b]"
+
+    Button:
+        id: back
+        pos_hint: {'center_x': 0.25,'center_y':0.3}
+        markup: True
+        size_hint: None, None
+        size:200,100
+        text:"[b]Back to Login[/b]"
+        on_press:root.manager.current="login"
+    
+    Button:
+        id: Setcontrol
+        markup: True
+        size_hint: None, None
+        pos_hint: {'center_x': 0.25,'center_y':0.6}
+        size: 200, 100
+        text:"[b]Set Control[/b]"
+        on_press:root.manager.current="setcontrol"
+
+    Button:
+        id: currentdata
+        markup: True
+        size_hint: None, None
+        pos_hint: {'center_x': 0.65,'center_y':0.6}
+        size: 200,100
+        text:"[b]View Current Data[/b]"
+        on_press:root.manager.current="currentdata"
+    
+    Button:
+        id: pastdata
+        markup: True
+        size_hint: None, None
+        pos_hint: {'center_x': 0.65,'center_y':0.3}
+        size: 200,100
+        text:"[b]View Past Data[/b]"
+        on_press:root.manager.current="pastdata"
+
+  
+<SetControl>:
+
+    Button:
+        id: back
+        size_hint: None, None
+        pos_hint: {'right': 1, 'top': 1}
+        size: 150, 50
+        text: "Back"
+        on_press:root.manager.current="menu"
+		
+    Label:
+        text: 'Set Controls'
+        pos_hint: {'center_x': 0.5, 'center_y': .95}
+        font_size: '30sp'
+	
+    Label:
+        text: 'Temperature Zones (C)'
+        pos_hint: {'center_x': 0.25, 'center_y': 0.8}
+        font_size: '20sp'
+		
+    BoxLayout:
+        orientation: 'vertical'
+        size_hint: None, None
+        pos_hint: {'center_x': 0.25, 'center_y': 0.2}
+        
+        
+        BoxLayout:
+			orientation: 'horizontal'
+			size_hint: None, None
+			
+			Label:
+				text: 'Zone 1'
+				
+			Widget:
+				width: '64dp'
+				size_hint_x: None
+				
+			TextInput:
+				id: temp1
+				size_hint: None, None
+				height: '32dp'
+				width: '48dp'
+				pos_hint: {'center_y': .5}
+				input_filter: 'int'
+				multiline: False
+				on_text: root.temp1()
+				
+		BoxLayout:
+			orientation: 'horizontal'
+			size_hint: None, None
+			
+			Label:
+				text: 'Zone 2'
+				
+			Widget:
+				width: '64dp'
+				size_hint_x: None
+				
+			TextInput:
+				id: temp2
+				size_hint: None, None
+				height: '32dp'
+				width: '48dp'
+				pos_hint: {'center_y': .5}
+				input_filter: 'int'
+				multiline: False
+				on_text: root.temp2()
+		
+		BoxLayout:
+			orientation: 'horizontal'
+			size_hint: None, None
+			
+			Label:
+				text: 'Zone 3'
+				
+			Widget:
+				width: '64dp'
+				size_hint_x: None
+				
+			TextInput:
+				id: temp3
+				size_hint: None, None
+				height: '32dp'
+				width: '48dp'
+				pos_hint: {'center_y': .5}
+				input_filter: 'int'
+				multiline: False
+				on_text: root.temp3()
+		
+		BoxLayout:
+			orientation: 'horizontal'
+			size_hint: None, None
+			
+			Label:
+				text: 'Zone 4'
+				
+			Widget:
+				width: '64dp'
+				size_hint_x: None
+				
+			TextInput:
+				id: temp4
+				size_hint: None, None
+				height: '32dp'
+				width: '48dp'
+				pos_hint: {'center_y': .5}
+				input_filter: 'int'
+				multiline: False
+				on_text: root.temp4()
+				
+	BoxLayout:
+		orientation: 'vertical'
+		size_hint: None, None
+		pos_hint: {'center_x': 0.75, 'center_y': 0.3}
+		
+		BoxLayout:
+			orientation: 'horizontal'
+			size_hint: None, None
+			
+			Label:
+				text: 'Screw Speed (rpm)'
+				
+			Widget:
+				width: '96dp'
+				size_hint_x: None
+				
+			TextInput:
+				id: screw
+				size_hint: None, None
+				height: '32dp'
+				width: '48dp'
+				pos_hint: {'center_y': .5}
+				input_filter: 'int'
+				multiline: False
+				on_text: root.screw()
+				
+		BoxLayout:
+			orientation: 'horizontal'
+			size_hint: None, None
+			
+			Label:
+				text: 'Feed Rate (mmpr)'
+				
+			Widget:
+				width: '96dp'
+				size_hint_x: None
+				
+			TextInput:
+				id: feed
+				size_hint: None, None
+				height: '32dp'
+				width: '48dp'
+				pos_hint: {'center_y': .5}
+				input_filter: 'int'
+				multiline: False
+				on_text: root.feed()
+				
+		Widget:
+			size_hint_y: None
+			height: '96dp'
+				
+		Button:
+			id: back
+			size_hint: None, None
+			pos_hint: {'right': 1, 'top': 1}
+			size: 150, 50
+			text: "Set Parameters"
+			on_press: root.send()		
+<ViewCurrentData>:
+    Button:
+        id: back
+        size_hint: None, None
+        pos_hint: {'left': 1,'top':1}
+        size: 150, 50
+        text:"Back"
+        on_press:root.stop()
+        on_release:root.manager.current="menu"
+
+    BoxLayout:
+        orientation: 'vertical'
+        size_hint: None, None
+        pos_hint: {'center_x': 0.25, 'center_y': 0.25}  
+        Label:
+            markup: True
+            text: '[b][size=24]Temperature Zones (C)[/size][/b]'
+            font_size: '20sp'
+
+        
+        BoxLayout:
+            orientation: 'horizontal'
+            size_hint: None, None
+           
+            Label:
+                width: '96dp'
+                size_hint_x: None
+                markup: True
+                text: '[b][size=24]Zone 1: [/size][/b]'
+            Label:
+                markup: True
+                width: '48dp'
+                size_hint: None, None
+                text: '[b][size=24]'+root.T1+u'\N{DEGREE SIGN}'+'C'+'[/size][/b]'
+
+        BoxLayout:
+            orientation: 'horizontal'
+            size_hint: None, None
+           
+            Label:
+                width: '96dp'
+                size_hint_x: None
+                markup: True
+                text: '[b][size=24]Zone 2: [/size][/b]'
+            Label:
+                markup: True
+                width: '48dp'
+                size_hint: None, None
+                text: '[b][size=24]'+root.T2+u'\N{DEGREE SIGN}'+'C'+'[/size][/b]'
+
+
+
+        BoxLayout:
+            orientation: 'horizontal'
+            size_hint: None, None
+           
+            Label:
+                width: '96dp'
+                size_hint_x: None
+                markup: True
+                text: '[b][size=24]Zone 3: [/size][/b]'
+            Label:
+                markup: True
+                width: '48dp'
+                size_hint: None, None
+                text: '[b][size=24]'+root.T3+u'\N{DEGREE SIGN}'+'C'+'[/size][/b]'
+
+
+
+        BoxLayout:
+            orientation: 'horizontal'
+            size_hint: None, None
+           
+            Label:
+                width: '96dp'
+                size_hint_x: None
+                markup: True
+                text: '[b][size=24]Zone 4: [/size][/b]'
+            Label:
+                markup: True
+                width: '48dp'
+                size_hint: None, None
+                text: '[b][size=24]'+root.T4+u'\N{DEGREE SIGN}'+'C'+'[/size][/b]'
+
+
+   
+    
+    BoxLayout:
+        orientation: 'vertical'
+        size_hint: None, None
+        pos_hint: {'center_x': 0.5, 'center_y': 0.1}
+        BoxLayout:
+            orientation: 'horizontal'
+            size_hint: None, None
+           
+            Label:
+                width: '200dp'
+                size_hint_x: None
+                markup: True
+                text: '[b][size=24]Pressure:     [/size][/b]'
+            Label:
+                markup: True
+                width: '100dp'
+                size_hint: None, None
+                text: '[b][size=24]'+root.P1+' psi'+'[/size][/b]'
+        
+        BoxLayout:
+            orientation: 'horizontal'
+            size_hint: None, None
+           
+            Label:
+                
+                width: '200dp'
+                size_hint_x: None
+                markup: True
+                text: '[b][size=24]Screw Speed:[/size][/b]'
+            Label:
+                markup: True
+                width: '100dp'
+                size_hint: None, None
+                text: '[b][size=24]'+root.S1+' RPM'+'[/size][/b]'
+
+        BoxLayout:
+            orientation: 'horizontal'
+            size_hint: None, None
+           
+            Label:
+                
+                width: '200dp'
+                size_hint_x: None
+                markup: True
+                text: '[b][size=24]Feed Rate:   [/size][/b]'
+            Label:
+                width: '100dp'
+                size_hint_x: None
+                markup: True
+                text: '[b][size=24]'+root.F1+' mmpr[/size][/b]'
+
+        BoxLayout:
+            orientation: 'horizontal'
+            size_hint: None, None
+           
+            Label:
+                
+                width: '200dp'
+                size_hint_x: None
+                markup: True
+                text: '[b][size=24]Polymer diamater:   [/size][/b]'
+            Label:
+
+                width: '100dp'
+                size_hint_x: None
+                markup: True
+                text: '[b][size=24]N/A[/size][/b]'
+        Button:
+            id: graph
+            size_hint: None, None
+            size: 250, 50
+            text:"View Graph"
+            on_press:root.manager.current="graph"
+    
+        Button:
+            id: camera
+            size_hint: None, None
+            size: 250, 50
+            text:"Camera feed"
+            on_press:root.manager.current="camera"
+                
+ 
+
+<ViewPastData>:
+
+    Button:
+        id: back
+        size_hint: None, None
+        pos_hint: {'left': 1,'top':1}
+        size: 150, 50
+        text:"Back"
+        on_press:root.manager.current="menu"
+    Label:
+        size_hint: None, None
+        pos_hint: {'center_x': 0.5,'center_y':0.95}
+        size: 150, 50
+        markup: True
+        text:"[b][size=24]View Past Data[/size][/b]"
+
+
+<ViewCamera>:
+    Button:
+        id: back
+        size_hint: None, None
+        pos_hint: {'left': 1,'top':1}
+        size: 150, 50
+        text:"Back"
+        on_press:root.manager.current="currentdata"
+ 
+    Label:
+        markup: True
+        size_hint: None, None
+        pos_hint: {'center_x': 0.5,'center_y':0.95}
+        size: 150, 150
+        text: "[b][size=30]Camera Feed[/size][/b]"
+    
+    Label:
+        markup: True
+        pos_hint:{'center_x':0.1,'center_y':0.5}
+        text: '[b][size=24]Polymer\nDiameter[/size][/b]'
+    Label:
+        markup: True
+        pos_hint: {'center_x':0.3,'center_y':0.5}
+        text: '[b][size=24]'+root.pd+'mm'+'[/size][/b]'
+
+    Image:
+        id: image
+        source: root.pic
+        pos_hint: {'center_x': 0.65,'center_y':0.5}
+        size_hint:[0.5,0.5]
+        canvas.before:
+            Rotate:
+                angle: 270
+                origin: self.center   
+
+    
+
+ 
+<ViewGraph>:
+    
+    Button:
+
+        id: back
+        size_hint: None, None
+        pos_hint: {'left': 1,'top':1}
+        size: 150, 50
+        text:"Back"
+        on_press:root.stop()
+        on_release:root.manager.current="currentdata"
+          
+    AnchorLayout:
+        pos_hint: {'left': 1,'top':0.8}
+        anchor_x:'left'
+        anchor_y:'top'
+
+        Label:
+            size_hint: [0,0.35]
+            markup: True
+            text: '[b][size=24]Temperature Zones[/size][/b]'
+       
+
+        BoxLayout:
+            orientation: "vertical"
+            size_hint: [0.3,0.25]
+             
+            BoxLayout:
+                orientation: "horizontal"
+                Button:
+                    text: "Zone 1"
+                    bold: True
+                    background_color: root.BC[0]
+                    on_release:root.T1()
+                Button:
+                    text: "Zone 2"
+                    background_color: root.BC[1]
+                    bold: True
+                    on_release:root.T2()
+
+
+            BoxLayout:
+                orientation: "horizontal"
+               
+                Button:
+                    text: "Zone 3"
+                    background_color: root.BC[2]
+                    bold: True
+                    on_release:root.T3()
+
+                Button:
+                    text: "Zone 4"
+                    background_color: root.BC[3]
+                    bold: True
+                    on_release:root.T4()
+    AnchorLayout:
+        pos_hint: {'left':1,'top':0.8}
+        anchor_x:'left'
+        anchor_y:'center'
+   
+        BoxLayout:
+            size_hint: [0.3, 0.25]
+            orientation: "vertical"
+            Button:
+                text: "Pressure"
+                bold: True
+                background_color: root.BC[4]
+                on_press: root.P1()
+            Button:
+                text: "Screw Speed"
+                bold: True
+                background_color: root.BC[5]
+                on_press: root.S1()
+            Button:
+                text: "Feed Rate"
+                bold: True
+                background_color: root.BC[6]
+                on_press: root.F1()
+
+    AnchorLayout:
+        pos_hint: {'right':1,'top':1}
+        anchor_x:'right'
+        anchor_y:'center'
+        Graph:
+            id: graph
+            size_hint:[0.65,0.85]
+            xlabel: "Time/s"
+            ylabel: ""
+            xmin: 0
+            xmax: 300
+            x_ticks_major:60
+            x_grid_label: True
+            ymin: 0
+            ymax: 1000
+            y_grid_label:True
+            y_ticks_major:100
+
+             
+  
