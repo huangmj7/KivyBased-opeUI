@@ -1,0 +1,9 @@
+Time 2020-04-24 09:20:50.852867: User Minjia Huang login with code Beta testing
+Target Polymer: N/A
+Time 2020-04-24 09:21:21.806315: No.1 Upadte settings
+Set Temperature Zone 1 to 300°C
+Set Temperature Zone 2 to 234°C
+Set Temperature Zone 3 to 289°C
+Set Temperature Zone 4 to 12°C
+Set Screw Speed 465 RPM
+Set Feed Rate to 500 mmpr
