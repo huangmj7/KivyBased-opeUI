@@ -48,8 +48,8 @@ def Simulator():
         DS = PLC.GetSensorReadings()
 
         global CameraSet
-        try:
-            CameraSet = piCamera.Get() #Camera
+        #try:
+            #CameraSet = piCamera.Get() #Camera
         
 
         #Temperatur Zone 1
@@ -332,6 +332,11 @@ class ScreenApp(App):
         Manager.add_widget(ViewCamera(name = 'camera'))
         
         return Manager
+
+    def on_request_close(self,*args):
+
+        print("App is closing.......")
+        return True
 
 #Global
  
