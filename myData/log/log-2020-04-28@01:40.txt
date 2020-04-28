@@ -1,0 +1,44 @@
+Time 2020-04-28 01:40:54.727015: User testing login with code admin
+Target Polymer: cz645
+Time 2020-04-28 01:41:22.543590: No.<Screen name='setcontrol'> Upadte settings
+Set Temperature Zone 1 to 345°C
+Set Temperature Zone 2 to 456°C
+Set Temperature Zone 3 to 346°C
+Set Temperature Zone 4 to 453°C
+Set Screw Speed 500 RPM
+Set Feed Rate to 900 mmpr
+Time 2020-04-28 01:41:29.198752: No.<Screen name='setcontrol'> Upadte settings
+Set Temperature Zone 1 to 345°C
+Set Temperature Zone 2 to 456°C
+Set Temperature Zone 3 to 346°C
+Set Temperature Zone 4 to 453°C
+Set Screw Speed 500 RPM
+Set Feed Rate to 890 mmpr
+Time 2020-04-28 01:41:39.121313: No.<Screen name='setcontrol'> Upadte settings
+Set Temperature Zone 1 to 345°C
+Set Temperature Zone 2 to 456°C
+Set Temperature Zone 3 to 346°C
+Set Temperature Zone 4 to 453°C
+Set Screw Speed 500 RPM
+Set Feed Rate to 700 mmpr
+Time 2020-04-28 01:41:48.196522: No.<Screen name='setcontrol'> Upadte settings
+Set Temperature Zone 1 to 345°C
+Set Temperature Zone 2 to 456°C
+Set Temperature Zone 3 to 346°C
+Set Temperature Zone 4 to 453°C
+Set Screw Speed 500 RPM
+Set Feed Rate to 304 mmpr
+Time 2020-04-28 01:41:54.966999: No.<Screen name='setcontrol'> Upadte settings
+Set Temperature Zone 1 to 345°C
+Set Temperature Zone 2 to 456°C
+Set Temperature Zone 3 to 346°C
+Set Temperature Zone 4 to 453°C
+Set Screw Speed 500 RPM
+Set Feed Rate to 789 mmpr
+Time 2020-04-28 01:42:00.511313: No.<Screen name='setcontrol'> Upadte settings
+Set Temperature Zone 1 to 345°C
+Set Temperature Zone 2 to 456°C
+Set Temperature Zone 3 to 346°C
+Set Temperature Zone 4 to 453°C
+Set Screw Speed 500 RPM
+Set Feed Rate to 500 mmpr

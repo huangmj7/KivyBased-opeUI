@@ -1,6 +1,6 @@
-<Login>:			
+<Login>:
     
-    Label:
+	Label:
         markup: True
         pos_hint:{'center_x': 0.2,'center_y':0.9}
         size: 150,50
@@ -61,7 +61,6 @@
             multiline: False
 			
 
-           
 
 <Menu>:
 
@@ -107,7 +106,9 @@
         text:"[b]View Past Data[/b]"
         on_press:root.manager.current="pastdata"
 
-  
+
+
+
 <SetControl>:
 
     Button:
@@ -429,7 +430,7 @@
                 width: '100dp'
                 size_hint_x: None
                 markup: True
-                text: '[b][size=24]N/A[/size][/b]'
+                text: '[b][size=24]'+root.PD1+' mm[/size][/b]'
         Button:
             id: graph
             size_hint: None, None
@@ -443,24 +444,22 @@
             size: 250, 50
             text:"Camera feed"
             on_press:root.manager.current="camera"
-                
+
+        
  
 
 <ViewPastData>:
-
+    
     Button:
+           
         id: back
-        size_hint: None, None
+        size_hint: None,None
         pos_hint: {'left': 1,'top':1}
         size: 150, 50
         text:"Back"
         on_press:root.manager.current="menu"
-    Label:
-        size_hint: None, None
-        pos_hint: {'center_x': 0.5,'center_y':0.95}
-        size: 150, 50
-        markup: True
-        text:"[b][size=24]View Past Data[/size][/b]"
+            
+           
 
 
 <ViewCamera>:
@@ -491,7 +490,7 @@
     Image:
         id: image
         source: root.pic
-        pos_hint: {'center_x': 0.65,'center_y':0.5}
+        pos_hint: {'center_x': 0.75,'center_y':0.5}
         size_hint:[0.5,0.5]
         canvas.before:
             Rotate:
@@ -518,12 +517,6 @@
         anchor_x:'left'
         anchor_y:'top'
 
-        Label:
-            size_hint: [0,0.35]
-            markup: True
-            text: '[b][size=24]Temperature Zones[/size][/b]'
-       
-
         BoxLayout:
             orientation: "vertical"
             size_hint: [0.3,0.25]
@@ -531,12 +524,12 @@
             BoxLayout:
                 orientation: "horizontal"
                 Button:
-                    text: "Zone 1"
+                    text: "Temperature\nZone 1"
                     bold: True
                     background_color: root.BC[0]
                     on_release:root.T1()
                 Button:
-                    text: "Zone 2"
+                    text:  "Temperature\nZone 2"
                     background_color: root.BC[1]
                     bold: True
                     on_release:root.T2()
@@ -546,13 +539,13 @@
                 orientation: "horizontal"
                
                 Button:
-                    text: "Zone 3"
+                    text:  "Temperature\nZone 3"
                     background_color: root.BC[2]
                     bold: True
                     on_release:root.T3()
 
                 Button:
-                    text: "Zone 4"
+                    text:  "Temperature\nZone 4"
                     background_color: root.BC[3]
                     bold: True
                     on_release:root.T4()

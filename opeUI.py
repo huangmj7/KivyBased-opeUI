@@ -17,7 +17,7 @@ from kivy.uix.recyclegridlayout import RecycleGridLayout
 from kivy.uix.behaviors import FocusBehavior
 from kivy.uix.recycleview.layout import LayoutSelectionBehavior
 from kivy.core.window import Window
-from kivy.garden.graph import LinePlot ,MeshLinePlot
+from kivy_garden.graph import LinePlot ,MeshLinePlot
 from kivy.animation import Animation
 from kivy.uix.textinput import TextInput
 from kivy.uix.widget import Widget
@@ -31,13 +31,14 @@ from threading import Thread
 #Simulation class
 from PLC_CONTROL import PLCControl
 from Camera_Access import CameraAccess
+from DataManager import DataManager
 
 #Global
 global piCamera 
 global PLC #PLCControl Object
-global DataSets #dict()  "T1":[]
+global DM
 
-def PLCSimulator():
+def Simulator():
 
     #Mimic PLC running
     while True:
@@ -46,7 +47,13 @@ def PLCSimulator():
         #Store 5 minutes == 300 seconds data
         DS = PLC.GetSensorReadings()
 
+        global CameraSet
+        try:
+            CameraSet = piCamera.Get() #Camera
+        
+
         #Temperatur Zone 1
+        global Dataset
         if(len(DataSet["T1"]) == 300):
             #Re-new data
             DataSet["T1"] = []
@@ -74,35 +81,22 @@ def PLCSimulator():
 
 
 class Login(Screen):
-    
-    #name = "";
-    #access ="";
-    #polymer = "";
 
-    #def name(self):
-        #text = self.root.ids.name.text
-        #if(len(text) > 0):self.name = text
-    
-    #def access(self):
-        #text = self.root.ids.access.text
-        #if(len(text) > 0):self.access = text
+	location = "login"
 
-    #def polymer(self):
-        #text = self.root.ids.polymer.text
-        #if(len(text) > 0):self.polymer = text
-    location = "login"
-
-    def enter(self):
-
-       name = self.ids.name.text
-       access = self.ids.access.text
-       polymer = self.ids.polymer.text
-       print("Name: ", name)
-       print("Access: ", access)
-       print("Polymer: ", polymer)
-       if(len(name) > 0 and len(access) > 0 and len(polymer) > 0):
-           self.location = "menu"
-           PLC.SetUser(name,access,polymer);
+	def enter(self):
+            
+            name = self.ids.name.text
+            access = self.ids.access.text
+            polymer = self.ids.polymer.text
+            print("Name: ", name)
+            print("Access: ", access)
+            print("Polymer: ", polymer)
+            #Allow log in only when all three data are entered
+            #Verification conduct here
+            if(len(name) > 0 and len(access) > 0 and len(polymer) > 0):
+                self.location = "menu"
+                DM.CreateLog(name,access,polymer)
 
 class Menu(Screen):
     pass
@@ -148,13 +142,14 @@ class SetControl(Screen):
         if(len(text) > 0):self.f1 = int(text)
 
     def send(self):
-        #print("Temp Zone 1: ", self.t1)
-        #print("Temp Zone 2: ", self.t2)
-        #print("Temp Zone 3: ", self.t3)
-        #print("Temp Zone 4: ", self.t4)
-        #print("Temp Screw Speed: ", self.s1)
-        #print("Temp Feed Rate: ", self.f1)
+        print("Temp Zone 1: ", self.t1)
+        print("Temp Zone 2: ", self.t2)
+        print("Temp Zone 3: ", self.t3)
+        print("Temp Zone 4: ", self.t4)
+        print("Temp Screw Speed: ", self.s1)
+        print("Temp Feed Rate: ", self.f1)
         PLC.SetControl(self.t1,self.t2,self.t3,self.t4,self.s1,self.f1)
+        DM.WriteLog(self,self.t1,self.t2,self.t3,self.t4,self.s1,self.f1)
 
 class ViewCurrentData(Screen):
 
@@ -165,7 +160,7 @@ class ViewCurrentData(Screen):
     P1 = StringProperty()
     S1 = StringProperty()
     F1 = StringProperty()
-
+    PD1 = StringProperty()
 
     def __init__(self, **kwargs):
         super(ViewCurrentData, self).__init__(**kwargs)
@@ -176,6 +171,7 @@ class ViewCurrentData(Screen):
         self.P1 = "-1"
         self.S1 = "-1"
         self.F1 = "-1" #Only change once since sensor not yet being set up
+        self.PD1 = "-1"
 
         self.getCurrent()
 
@@ -188,6 +184,8 @@ class ViewCurrentData(Screen):
     def get_value(self,dt):
 
        DS = PLC.GetSensorReadings()
+       
+
        self.T1 = str(int(DS[0]))
        self.T2 = str(int(DS[1]))
        self.T3 = str(int(DS[2]))
@@ -195,15 +193,21 @@ class ViewCurrentData(Screen):
        self.P1 = str(int(DS[4]))
        self.S1 = str(int(DS[5]))
        self.F1 = str(int(DS[6]))
+       self.PD1 = str(int(CameraSet[1]))
+
+       temp = []
+       temp.extend(DS)
+       temp.extend(CameraSet) 
+       DM.WriteCSV(temp)
 
 
     def stop(self):
         Clock.unschedule(self.get_value)
 
 
-
 class ViewPastData(Screen,BoxLayout):
-    pass
+	pass
+       
 
 
 
@@ -217,7 +221,7 @@ class ViewCamera(Screen):
         
         super(ViewCamera, self).__init__(**kwargs)
         self.pd = "-1"
-        self.pic = 'myData/image/test.jpeg'
+        self.pic = 'myData/image/test.jpg' #Default picture
         self.getCurrent()
 
 
@@ -226,10 +230,12 @@ class ViewCamera(Screen):
 
     def get_value(self,dt):
         
-        rl = piCamera.Get()
-        self.pd = rl[1]
-        self.pic = rl[2]
-        if(int(rl[0]) == 5):self.ids['image'].reload()
+        #print(CameraSet) 
+        self.pd = CameraSet[1]
+        self.pic = CameraSet[2]
+        if(CameraSet[0] == "reload"):self.ids['image'].reload()
+        #if(CameraSet[0] == "ERROR") Waring pop up
+
 
     def stop(self):
         Clock.unschedule(self.get_value)
@@ -246,13 +252,13 @@ class ViewGraph(Screen,BoxLayout):
 
         super(ViewGraph, self).__init__(**kwargs)
         lw = 1.5
-        self.plotT1 = LinePlot(line_width = lw,color=self.BC[0]) #
-        self.plotT2 = LinePlot(line_width = lw,color=self.BC[1]) #
-        self.plotT3 = LinePlot(line_width = lw,color=self.BC[2]) #
-        self.plotT4 = LinePlot(line_width = lw,color=self.BC[3]) #
-        self.plotP1 = LinePlot(line_width = lw,color=self.BC[4]) #
-        self.plotS1 = LinePlot(line_width = lw,color=self.BC[5]) #
-        self.plotF1 = LinePlot(line_width = lw,color=self.BC[6]) #
+        self.plotT1 = LinePlot(line_width = lw,color=self.BC[0]) #Red
+        self.plotT2 = LinePlot(line_width = lw,color=self.BC[1]) #Blue
+        self.plotT3 = LinePlot(line_width = lw,color=self.BC[2]) #Yellow
+        self.plotT4 = LinePlot(line_width = lw,color=self.BC[3]) #Green
+        self.plotP1 = LinePlot(line_width = lw,color=self.BC[4]) #Purple
+        self.plotS1 = LinePlot(line_width = lw,color=self.BC[5]) #White
+        self.plotF1 = LinePlot(line_width = lw,color=self.BC[6]) #Orange
         self.inGraph = []
         #Be ready to plot
         Clock.schedule_interval(self.get_value, 1)
@@ -330,8 +336,12 @@ class ScreenApp(App):
 #Global
  
 piCamera= CameraAccess()
+CameraSet = ["wait","0","myData/image/test.jpg" ]
+
 PLC = PLCControl() 
 DataSet = dict()
+DM = DataManager()
+
 DataSet["T1"] = []
 DataSet["T2"] = []
 DataSet["T3"] = []
@@ -342,7 +352,7 @@ DataSet["F1"] = []
 
 
 #Thread
-get_level_thread = Thread(target = PLCSimulator)
+get_level_thread = Thread(target = Simulator)
 get_level_thread.daemon = True
 get_level_thread.start()
 ScreenApp().run()

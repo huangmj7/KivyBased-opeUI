@@ -1,0 +1,9 @@
+Time 2020-04-28 01:35:06.921571: User huangmu login with code admin
+Target Polymer: cz645
+Time 2020-04-28 01:35:24.620583: No.<Screen name='setcontrol'> Upadte settings
+Set Temperature Zone 1 to 123°C
+Set Temperature Zone 2 to 342°C
+Set Temperature Zone 3 to 453°C
+Set Temperature Zone 4 to 342°C
+Set Screw Speed 780 RPM
+Set Feed Rate to 345 mmpr
