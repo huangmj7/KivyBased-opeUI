@@ -34,8 +34,8 @@ class PLCControl:
             self.ReturnList[4] = random.uniform(100,1000)
 
             #Speed
-            if(self.ReturnList[5] < self.SetList[5]):self.ReturnList[5] += random.uniform(1,5) #Randomly generate increase value
-            if(self.ReturnList[5] > self.SetList[5]):self.ReturnList[5] -= random.uniform(1,5) #Randomly generate decrease value
+            if(self.ReturnList[5] < self.SetList[5]):self.ReturnList[5] += random.uniform(5,25) #Randomly generate increase value
+            if(self.ReturnList[5] > self.SetList[5]):self.ReturnList[5] -= random.uniform(5,25) #Randomly generate decrease value
 
             #Feed Rate 
             #Currently Unchange

@@ -1,0 +1,9 @@
+Time 2020-05-04 11:45:39.712609: User MH login with code admin
+Target Polymer: rpi202
+Time 2020-05-04 11:47:15.136164: No.<Screen name='setcontrol'> Upadte setting
+Set Temperature Zone 1 to 0°C
+Set Temperature Zone 2 to 0°C
+Set Temperature Zone 3 to 0°C
+Set Temperature Zone 4 to 0°C
+Set Screw Speed 500 RPM
+Set Feed Rate to 500 mmpr

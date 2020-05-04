@@ -15,6 +15,8 @@ class DataManager:
             self.logAddress = "myData/log/log-{}.txt".format(logintime)
             self.cvsAddress = "myData/log/log-{}.csv".format(logintime)
 
+
+
 	def CreateCSV(self,name,access,polymer):
             
             fields = ["Temperature 1","Temperature 2","Temperature 3","Temperature 4","Pressure","Speed","Feed Rate","Time interval","Polymer diameter","Image address"] 
@@ -49,7 +51,7 @@ class DataManager:
             if(not self.logCreated): return
             f = open(self.logAddress,"a")
             t = datetime.now()
-            f.write("Time {}: No.{} Upadte settings\n".format(t,updateNo))
+            f.write("Time {}: No.{} Upadte setting\n".format(t,updateNo))
             f.write("Set Temperature Zone 1 to {}".format(t1))
             f.write(u'\N{DEGREE SIGN}'+"C\n")
             f.write("Set Temperature Zone 2 to {}".format(t2))
@@ -62,4 +64,5 @@ class DataManager:
             f.write("Set Feed Rate to {} mmpr\n".format(f1))
             
             f.close()
+
 

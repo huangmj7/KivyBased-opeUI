@@ -47,9 +47,11 @@ def Simulator():
         #Store 5 minutes == 300 seconds data
         DS = PLC.GetSensorReadings()
 
-        global CameraSet
-        #try:
-            #CameraSet = piCamera.Get() #Camera
+        try:
+            global CameraSet
+            CameraSet = piCamera.Get() #Camera
+        except:
+            pass
         
 
         #Temperatur Zone 1
@@ -99,7 +101,10 @@ class Login(Screen):
                 DM.CreateLog(name,access,polymer)
 
 class Menu(Screen):
-    pass
+
+    def exit(self):
+
+        App.get_running_app().stop()
 
 class SetControl(Screen):
 
@@ -193,7 +198,7 @@ class ViewCurrentData(Screen):
        self.P1 = str(int(DS[4]))
        self.S1 = str(int(DS[5]))
        self.F1 = str(int(DS[6]))
-       self.PD1 = str(int(CameraSet[1]))
+       self.PD1 = CameraSet[1]
 
        temp = []
        temp.extend(DS)
@@ -336,6 +341,9 @@ class ScreenApp(App):
     def on_request_close(self,*args):
 
         print("App is closing.......")
+        return True
+
+    def on_stop(self,*args):
         return True
 
 #Global

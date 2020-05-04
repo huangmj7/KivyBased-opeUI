@@ -15,33 +15,37 @@ class CameraAccess:
 
     def __init__(self):
 
-        self.Pdiameter = 0
+        self.Pdiameter = "0"
         self.Start = 0
 
         self.Image = "" #Current images
         self.ImageNo = 1 #Helper
         self.MaxImage = 12 #Sample ranges
         self.Action = "" #status point
+        self.Camera = picamera.PiCamera() #open
+
+    def __del__(self):
+
+        self.Camera.close()
 
     def TakePicture(self):
 
+        if(self.Action == "ERROR"):return; #Camera failed to open
         my_path = "myData/image" #Given path
-        camera = picamera.PiCamera()
+
         try:
-            camera.resolution = (1280,720) #Based on Tom
+            self.Camera.resolution = (1280,720) #Based on Tom
             #camera.start_preview()
             time.sleep(2) #Warm-up time
             No = "pi{}.jpg".format(self.ImageNo)
             Name = os.path.join(my_path,No)
-            camera.capture(Name) #Store in given folder
+            self.Camera.capture(Name) #Store in given folder
             self.Image = Name #pdate current images
             self.ImageNo += 1
             if(self.ImageNo == self.MaxImage):self.ImageNo = 0 #only store image within 1 minutes
         except:
             #Camera issues
             self.Action = "ERROR"
-        finally:
-            camera.close()
 
      
     def GetDiameter(self):
@@ -113,14 +117,15 @@ class CameraAccess:
         tp = time.time() - self.Start
         
         #Camera need 2 second to warm : for now
-        if(tp > 3):
+        if(tp > 3 and self.Action != "ERROR"):
             
             self.Start = time.time() #Update at least every five seconds
             self.TakePicture() #Image taking
             self.Pdiameter = self.GetDiameter()#random.random()*100+random.uniform(25,28)
             if(self.Action != "ERROR"):self.Action = "reload"
-        else:
-            self.Action = "wait"
+        elif(self.Action != "ERROR:"):
+            self.Action = "wait" #allow error adjustment
+            
             
             
 

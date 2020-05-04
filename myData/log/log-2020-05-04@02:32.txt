@@ -1,0 +1,9 @@
+Time 2020-05-04 02:33:03.486730: User minjia huang login with code admin
+Target Polymer: rpi2020
+Time 2020-05-04 02:34:31.891184: No.<Screen name='setcontrol'> Upadte setting
+Set Temperature Zone 1 to 450°C
+Set Temperature Zone 2 to 238°C
+Set Temperature Zone 3 to 347°C
+Set Temperature Zone 4 to 399°C
+Set Screw Speed 500 RPM
+Set Feed Rate to 500 mmpr
